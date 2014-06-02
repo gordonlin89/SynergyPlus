@@ -9,35 +9,42 @@
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
 	<!-- CSS -->
 	<link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
 
 <!-- navbar -->
 <nav class="navbar navbar-default">
-	<div class="container">
+	<div class="container-fluid">
 		<a class="navbar-brand">SynergyPlus</a>
 		<ul class="nav navbar-nav">
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					FooBuilding <span class="caret"></span>
+					Foo Building <span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="/FooBuilding/layout">FooBuilding</a></li>
+					<li><a href="/Foo_Building/Floor_1">Foo Building</a></li>
 				</ul>
 			</li>
-			<li><a href="/FooBuilding/layout">Layout</a></li>
-			<li><a href="/FooBuilding/predict">Predict</a></li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					Floor 1 <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="/Foo_Building/Floor_1">Floor 1</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-2">
 			{% block sidebar %}
 			{% endblock %}
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-10">
 			{% block main %}
 			{% endblock %}
 		</div>

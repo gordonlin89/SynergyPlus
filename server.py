@@ -1,28 +1,6 @@
 from bottle import *
+import mediator
 import json
-
-chart = {
-	"chart": {"type":"line"},
-	"title": {"text": 'Power Comparison'},
-	"xAxis": {
-		"categories": ['Jan', 'Feb', 'Mar'],
-		"title": {"text":"Month"}
-	},
-	"yAxis": {
-		"title": {"text":"Power"}
-	},
-	"series":[
-		{
-			"name": "Current",
-			"data": [5, 10, 15]
-		},
-		{
-			"name": "Predicted",
-			"data": [2, 4, 13]
-		}
-	],
-	"credits": {"enabled": False}
-}
 
 #Static resources
 @route('/css/<filename>')
@@ -33,24 +11,22 @@ def css(filename):
 def css(filename):
 	return static_file(filename, root='./js')
 
-@route('/img/<filename>')
-def css(filename):
-	return static_file(filename, root='./img')
-
 #AJAX
-@post('/test')
+@post('/chart')
 def test():
-	time.sleep(1)
+	time.sleep(2)
 	temperature = request.forms.get('temperature')
-	return chart
+	return mediator.getChart()
+
+#Data
+@get('/<building>/<floor>/csv')
+def csv(building, floor):
+	response.content_type = 'text/plain; charset=UTF8'
+	return "\r\n".join([",".join([str(i) for i in data]) for data in mediator.getData()])
 
 #SynergyPlus Pages
-@route('/<building>/layout')
-def base(building):
-	return jinja2_template('layout.html')
-
-@route('/<building>/predict')
-def base(building):
-	return jinja2_template('predict.html', power=json.dumps(chart))
+@route('/<building>/<floor>')
+def layout(building, floor):
+	return jinja2_template('main.html', data=mediator.getData())
 
 run(host='localhost', port=8080)
