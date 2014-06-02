@@ -8,4 +8,4 @@ CSE 210 Spring14 Project
 
 # How to Run
 1. python server.py
-2. localhost:8080/FooBuilding/layout
+2. http://localhost:8080/Foo_Building/Floor_1
