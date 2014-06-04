@@ -3,8 +3,9 @@ import csv
 from collections import defaultdict
 
 
-
 def change(temp='20',denomination='D',start_month='1',start_date='1',end_month='1',end_date='31'):
+    '''Makes changes in temperature, frequency at which output is generated, and the run period for simulation. 
+    If data not given, assume default value'''
     list_of_den=('Daily','Hourly','Monthly')
     if denomination=='D':
         den=list_of_den[0]
@@ -22,6 +23,10 @@ def change(temp='20',denomination='D',start_month='1',start_date='1',end_month='
     
 
 def output(denomination='D'):
+    '''Generates 4 arrays of strigns in the following order: Date/Time, Cooling Energy, Heating Energy, Electrical Energy.
+    Ensure that the denomination given here as an input parameter is the same as the denomination given in the above
+    'change' function. 
+    '''
     columns = defaultdict(list) # each value in each column is appended to a list
 
     with open('C:\EnergyPlusV8-1-0\ExampleFiles\Outputs\RefBldgSmallOfficeNew2004_ChicagoMeter.csv', 'rb') as f:
